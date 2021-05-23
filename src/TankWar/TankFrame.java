@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 
 class TankFrame extends JFrame{	
-	//test
+	//test test
 	List<Bullet> bullets = new ArrayList<>();//存放子弹，实现发射多颗子弹
 	List<Tank> player = new ArrayList<>();
 	List<Tank> enemies = new ArrayList<>();
