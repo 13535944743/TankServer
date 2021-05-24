@@ -4,6 +4,7 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
@@ -23,8 +24,8 @@ import javax.swing.JPanel;
 import java.util.ArrayList;
 
 
-class TankFrame extends JFrame{	
-	//test test test
+class TankFrame extends Frame{	
+	
 	List<Bullet> bullets = new ArrayList<>();//存放子弹，实现发射多颗子弹
 	List<Tank> player = new ArrayList<>();
 	List<Tank> enemies = new ArrayList<>();
@@ -43,37 +44,6 @@ class TankFrame extends JFrame{
 		setTitle("坦克大战");
 		setBackground(Color.BLACK);
 		setLayout(null);
-		JPanel root = new JPanel();
-		add(root);
-		root.setLayout(null);
-		root.setOpaque(true);
-		root.setBounds(600, 300, 200, 300);
-		root.setBackground(Color.WHITE);
-//		JButton b1 = new JButton("返回首页");
-//		b1.setFont( new Font("雅黑", Font.BOLD, 16));
-//		Color c = new Color(94, 108, 46);
-//		b1.setBackground(Color.RED);
-//		b1.setForeground(Color.BLACK);
-//		b1.setBounds(650, 300, 100, 100);
-//		b1.addMouseListener(new MouseAdapter() {//鼠标监听事件
-//			public void mouseReleased(MouseEvent event) {
-//				if(event.getButton()==MouseEvent.BUTTON1) {  
-//					System.out.println("返回首页");
-//				}
-//			}
-//			public void mouseEntered(MouseEvent event) {
-//				System.out.println("enter");
-//				b1.setBackground(Color.WHITE);
-//				b1.setForeground(Color.BLACK);
-//			}
-//			public void mouseExited(MouseEvent event) {
-//				System.out.println("exited");
-//				b1.setBackground(Color.WHITE);
-//				b1.setForeground(Color.BLACK);
-//			}
-//		});
-//		root.add(b1);
-		
 		setVisible(true);
 		this.addKeyListener( new MyKeyListener());
 		addWindowListener(new WindowAdapter() {
@@ -83,15 +53,6 @@ class TankFrame extends JFrame{
 		});
 	}
 	
-	
-	@Override
-	public void repaint() {
-		super.repaint();
-		update(getGraphics());
-		flag = 1;
-	}
-
-
 	Image offScreenImage = null;
 	@Override
 	public void update(Graphics g) {
@@ -100,7 +61,7 @@ class TankFrame extends JFrame{
 		}
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
-//		gOffScreen.setColor(Color.BLACK);
+		gOffScreen.setColor(Color.BLACK);
 		gOffScreen.fillRect(0, 0, Window_Width, Window_Height);
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
@@ -108,11 +69,6 @@ class TankFrame extends JFrame{
 	}  //双缓冲，处理闪烁问题，相当于在其他地方画好后，再直接用
 	
 	public void paint(Graphics g) {
-		if(flag == 1) {
-			flag = 0;
-			return;
-		}
-//		System.out.println("画");
 		int width = this.getWidth();
 		int height = this.getHeight();
 		g.clearRect(0, 0, width, height);

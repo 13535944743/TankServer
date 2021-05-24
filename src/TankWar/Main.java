@@ -20,6 +20,10 @@ public class Main {
 				Method.single_game(f1);
 				StartFrame.flag = 0;
 			}
+			else if(StartFrame.flag == 2) {
+				f1.setVisible(false);
+//				Server s = new Server();
+			}
 			else if(StartFrame.flag == 3) {
 				f1.setVisible(false);
 				f2.setVisible(true);
