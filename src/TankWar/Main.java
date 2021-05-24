@@ -1,6 +1,7 @@
 package TankWar;
 
 import java.awt.Frame;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,7 +10,7 @@ import javax.swing.JFrame;
 
 public class Main {
 	public static StartFrame f1 = new StartFrame("坦克大战");
-	public static void main(String[] args) throws InterruptedException{
+	public static void main(String[] args) throws InterruptedException, IOException{
 		
 		HelpFrame f2 = new HelpFrame("游戏帮助");
 		f2.setVisible(false);
@@ -21,8 +22,10 @@ public class Main {
 				StartFrame.flag = 0;
 			}
 			else if(StartFrame.flag == 2) {
-				f1.setVisible(false);
-//				Server s = new Server();
+//				f1.setVisible(false);
+				System.out.println("OK");
+				Server server = new Server();
+				Client client = new Client();
 			}
 			else if(StartFrame.flag == 3) {
 				f1.setVisible(false);
