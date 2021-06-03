@@ -16,11 +16,12 @@ public class Tank {
 	private boolean havedfired = false; //记录有没有发射过子弹
 	
 	private boolean moving = false;
-	private final int speed = 6;
+	private final int speed = 1;  //6
 	private TankFrame tf;
 	private boolean live = true;
 	private Group group = Group.Enemy;
-	
+	private int id = 0;//辨别客户端服务端坦克,0 为服务器端，1 为客户端
+	public int index;  //编号，确定变换方向时是哪辆坦克
 	public Tank(int x, int y, Direction dir,Group group, TankFrame tf) {
 		super();
 		this.setX(x);
@@ -34,14 +35,15 @@ public class Tank {
 	public void paint(Graphics g) {
 		if(!live)  {
 			tf.enemies.remove(this);
-			tf.player.remove(this);   //坦克死掉移除
+			tf.player1.remove(this);   //坦克死掉移除
+			tf.player2.remove(this);   //坦克死掉移除
 			tf.blast.setLiving(true);
 			tf.blast.setX(this.x);
 			tf.blast.setY(this.y);
 			tf.blast.paint(g);
 			return;
 		}
-		if(group == Group.Player) {
+		if(group == Group.Player && id == 0) {
 			switch(dir) {
 			case LEFT:	g.drawImage(ResourceMgr.tankL, getX(), getY(), width, height, null);
              break;
@@ -50,6 +52,19 @@ public class Tank {
 			case UP:	g.drawImage(ResourceMgr.tankU, getX(), getY(), width, height, null);
 		     break;
 			case DOWN:	g.drawImage(ResourceMgr.tankD, getX(), getY(), width, height, null);
+		     break;
+			default:break;
+			}
+		}
+		else if(group == Group.Player && id == 1) {
+			switch(dir) {
+			case LEFT:	g.drawImage(ResourceMgr.tank1L, getX(), getY(), width, height, null);
+             break;
+			case RIGHT:	g.drawImage(ResourceMgr.tank1R, getX(), getY(), width, height, null);
+		     break;
+			case UP:	g.drawImage(ResourceMgr.tank1U, getX(), getY(), width, height, null);
+		     break;
+			case DOWN:	g.drawImage(ResourceMgr.tank1D, getX(), getY(), width, height, null);
 		     break;
 			default:break;
 			}
@@ -395,6 +410,14 @@ public class Tank {
 	}
 	public int getSpeed() {
 		return speed;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

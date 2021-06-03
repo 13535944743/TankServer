@@ -42,7 +42,7 @@ public class WinFrame extends JFrame{
 				if(event.getButton() == MouseEvent.BUTTON1) {  
 						try {
 							dispose();
-							Main.f1.setVisible(true);
+							ServerMain.f1.setVisible(true);
 						}
 						catch (Exception e) {
 						e.printStackTrace();

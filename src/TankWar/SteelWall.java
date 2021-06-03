@@ -72,7 +72,7 @@ public class SteelWall {
 		tf.steelwalls.add(new SteelWall(320 , 31, tf));
 		tf.steelwalls.add(new SteelWall(320 , 305, tf));
 		
-		tf.steelwalls.add(new SteelWall(365 , 260, tf));
+//		tf.steelwalls.add(new SteelWall(365 , 260, tf));
 		
 		tf.steelwalls.add(new SteelWall(410 , 166, tf));
 		

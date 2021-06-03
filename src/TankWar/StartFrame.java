@@ -44,7 +44,6 @@ public class StartFrame extends JFrame{
 				}
 			}
 			public void mouseEntered(MouseEvent event) {
-				System.out.println("enter");
 				b1.setBackground(Color.WHITE);
 				b1.setForeground(Color.BLACK);
 			}
@@ -66,16 +65,13 @@ public class StartFrame extends JFrame{
 			public void mouseReleased(MouseEvent event) {
 				if(event.getButton()==MouseEvent.BUTTON1) {  
 					flag = 2;
-					System.out.println("双人游戏");
 				}
 			}
 			public void mouseEntered(MouseEvent event) {
-				System.out.println("enter");
 				b2.setBackground(Color.WHITE);
 				b2.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent event) {
-				System.out.println("exited");
 				b2.setBackground(c);
 				b2.setForeground(Color.WHITE);
 			}
@@ -89,16 +85,13 @@ public class StartFrame extends JFrame{
 			public void mouseReleased(MouseEvent event) {
 				if(event.getButton()==MouseEvent.BUTTON1) {  
 					flag = 3;
-					System.out.println("单人游戏");
 				}
 			}
 			public void mouseEntered(MouseEvent event) {
-				System.out.println("enter");
 				b3.setBackground(Color.WHITE);
 				b3.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent event) {
-				System.out.println("exited");
 				b3.setBackground(c);
 				b3.setForeground(Color.WHITE);
 			}
@@ -118,12 +111,10 @@ public class StartFrame extends JFrame{
 				}
 			}
 			public void mouseEntered(MouseEvent event) {
-				System.out.println("enter");
 				b4.setBackground(Color.WHITE);
 				b4.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent event) {
-				System.out.println("exited");
 				b4.setBackground(c);
 				b4.setForeground(Color.WHITE);
 			}

@@ -27,7 +27,8 @@ import java.util.ArrayList;
 class TankFrame extends Frame{	
 	
 	List<Bullet> bullets = new ArrayList<>();//存放子弹，实现发射多颗子弹
-	List<Tank> player = new ArrayList<>();
+	List<Tank> player1 = new ArrayList<>();
+	List<Tank> player2 = new ArrayList<>();
 	List<Tank> enemies = new ArrayList<>();
 	List<Wall> walls = new ArrayList<>();
 	List<SteelWall> steelwalls = new ArrayList<>();
@@ -37,11 +38,12 @@ class TankFrame extends Frame{
 	int step_to_win = 40;
 	public final int Window_Width = 800, Window_Height = 625;
 	int flag = 0; 
+	String data = "";
 	
 	public TankFrame() {
 		setSize(Window_Width,Window_Height);
 		setResizable(false);
-		setTitle("坦克大战");
+//		setTitle("坦克大战");
 		setBackground(Color.BLACK);
 		setLayout(null);
 		setVisible(true);
@@ -81,8 +83,11 @@ class TankFrame extends Frame{
 		g.setColor(Color.RED);
         
 		home.paint(g);
-		for(int i = 0; i < player.size(); i++) {
-			player.get(i).paint(g);
+		for(int i = 0; i < player1.size(); i++) {
+			player1.get(i).paint(g);
+		}
+		for(int i = 0; i < player2.size(); i++) {
+			player2.get(i).paint(g);
 		}
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).paint(g);
@@ -128,8 +133,8 @@ class TankFrame extends Frame{
 			case KeyEvent.VK_W:	flag_W = false;break;
 			case KeyEvent.VK_S:	flag_S = false;break;
 			case KeyEvent.VK_J:	{
-				for(int j = 0; j < player.size(); j++) {
-					player.get(j).fire();break;
+				for(int j = 0; j < player1.size(); j++) {
+					player1.get(j).fire();break;
 				}
 				break;
 			}
@@ -139,33 +144,33 @@ class TankFrame extends Frame{
 		}  
 		public void setMainTankDirection() {
 			if(!flag_A && !flag_D && !flag_W && !flag_S)  {
-				for(int j = 0; j < player.size(); j++) {
-					player.get(j).setMoving(false);
+				for(int j = 0; j < player1.size(); j++) {
+					player1.get(j).setMoving(false);
 				}
 			}
 			else {
 				if(flag_A) {
-					for(int j = 0; j < player.size(); j++) {
-						player.get(j).setDir(Direction.LEFT);
+					for(int j = 0; j < player1.size(); j++) {
+						player1.get(j).setDir(Direction.LEFT);
 					}
 				}
 				if(flag_D) {
-					for(int j = 0; j < player.size(); j++) {
-						player.get(j).setDir(Direction.RIGHT);
+					for(int j = 0; j < player1.size(); j++) {
+						player1.get(j).setDir(Direction.RIGHT);
 					}
 				}
 				if(flag_W) {
-					for(int j = 0; j < player.size(); j++) {
-						player.get(j).setDir(Direction.UP);
+					for(int j = 0; j < player1.size(); j++) {
+						player1.get(j).setDir(Direction.UP);
 					}
 				}
 				if(flag_S) {
-					for(int j = 0; j < player.size(); j++) {
-						player.get(j).setDir(Direction.DOWN);
+					for(int j = 0; j < player1.size(); j++) {
+						player1.get(j).setDir(Direction.DOWN);
 					}
 				}
-				for(int j = 0; j < player.size(); j++) {
-					player.get(j).setMoving(true);
+				for(int j = 0; j < player1.size(); j++) {
+					player1.get(j).setMoving(true);
 				}
 			}
 		}

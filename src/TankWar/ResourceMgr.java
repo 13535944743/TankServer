@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class ResourceMgr {  //资源管理
-	public static BufferedImage tankL, tankU, tankR, tankD, bullet, wall, steelwall, enemy1L, enemy1R, enemy1U, enemy1D, enemybullet, home, grey,tankwar, win, gameover;
+	public static BufferedImage tankL, tankU, tankR, tankD, tank1L, tank1U, tank1R, tank1D,  bullet, wall, steelwall, enemy1L, enemy1R, enemy1U, enemy1D, enemybullet, home, grey,tankwar, win, gameover;
 	public static BufferedImage[] blasts = new BufferedImage[8];
 	
 	static{
@@ -14,6 +14,10 @@ public class ResourceMgr {  //资源管理
 			tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/p1tankU.gif"));
 			tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/p1tankR.gif"));
 			tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/p1tankD.gif"));
+			tank1L = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/p2tankL.gif"));
+			tank1U = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/p2tankU.gif"));
+			tank1R = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/p2tankR.gif"));
+			tank1D = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/p2tankD.gif"));
 			bullet = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/tankmissile.gif"));
 			wall = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/walls.gif"));
 			steelwall = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("img/steels.gif"));

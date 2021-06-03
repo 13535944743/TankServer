@@ -42,7 +42,11 @@ public class LostFrame extends JFrame{
 				if(event.getButton() == MouseEvent.BUTTON1) {  
 						try {
 							dispose();
-							Main.f1.setVisible(true);
+							if(ServerMain.model == 1) {
+								ServerMain.server.getSocket().close();
+								ServerMain.server.getServer().close();
+							}
+							ServerMain.f1.setVisible(true);
 						}
 						catch (Exception e) {
 						e.printStackTrace();
@@ -50,12 +54,10 @@ public class LostFrame extends JFrame{
 				}
 			}
 			public void mouseEntered(MouseEvent event) {
-				System.out.println("enter");
 				b1.setBackground(Color.WHITE);
 				b1.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent event) {
-				System.out.println("exited");
 				b1.setBackground(Color.BLACK);
 				b1.setForeground(Color.WHITE);
 			}
