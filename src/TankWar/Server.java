@@ -15,7 +15,7 @@ public class Server{
 	private ServerSocket server;
 	private Socket socket;
 	public static PrintWriter out;
-	public BufferedReader in;
+	public static BufferedReader in;
 	public static boolean isChanged = true;
 	public TankFrame tf;
 	
@@ -28,8 +28,12 @@ public class Server{
 		f.setVisible(false);
 		Double_Game dg = new Double_Game();
 		dg.start();
-		Thread.sleep(50);
-		tf = Method.tf;
+		while(Method.tf == null) {
+			Thread.sleep(50);
+		}
+		this.tf = Method.tf;
+		ReceiveThread rt = new ReceiveThread(this.tf);
+		rt.start();
 		sendMessage();
 //		out.println("连接成功");
 //		out.flush();
@@ -39,13 +43,14 @@ public class Server{
 		
 	}
 	private void sendMessage() throws InterruptedException {
+		
 		while(true) {
 			if(tf.data == "") {
-				Thread.sleep(50);
+				Thread.sleep(tf.sec);
 			}
 			if(tf.data != "") {
 				out.println(tf.data);
-				System.out.println(tf.data);
+//				System.out.println(tf.data);
 				out.flush();
 				tf.data = "";
 			}

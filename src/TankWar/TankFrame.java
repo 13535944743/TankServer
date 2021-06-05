@@ -39,6 +39,8 @@ class TankFrame extends Frame{
 	public final int Window_Width = 800, Window_Height = 625;
 	int flag = 0; 
 	String data = "";
+	public static int sec = 50;
+	public static int EnemyId = 1;
 	
 	public TankFrame() {
 		setSize(Window_Width,Window_Height);
@@ -84,16 +86,31 @@ class TankFrame extends Frame{
         
 		home.paint(g);
 		for(int i = 0; i < player1.size(); i++) {
-			player1.get(i).paint(g);
+			try {
+				player1.get(i).paint(g);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		for(int i = 0; i < player2.size(); i++) {
-			player2.get(i).paint(g);
+			try {
+				player2.get(i).paint(g);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).paint(g);
 		}
 		for(int i = 0; i < enemies.size(); i++) {
-			enemies.get(i).paint(g);
+			try {
+				enemies.get(i).paint(g);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		for(int i = 0; i < walls.size(); i++) {
 			walls.get(i).paint(g);
@@ -121,7 +138,12 @@ class TankFrame extends Frame{
 			case KeyEvent.VK_S:	flag_S = true;break;
 			default:break;
 			}
-			setMainTankDirection();
+			try {
+				setMainTankDirection();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		@Override
@@ -134,41 +156,60 @@ class TankFrame extends Frame{
 			case KeyEvent.VK_S:	flag_S = false;break;
 			case KeyEvent.VK_J:	{
 				for(int j = 0; j < player1.size(); j++) {
-					player1.get(j).fire();break;
+					try {
+						player1.get(j).fire();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}break;
 				}
 				break;
 			}
 			default:break;
 			}
-			setMainTankDirection();
+			try {
+				setMainTankDirection();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}  
-		public void setMainTankDirection() {
+		public void setMainTankDirection() throws InterruptedException {
 			if(!flag_A && !flag_D && !flag_W && !flag_S)  {
 				for(int j = 0; j < player1.size(); j++) {
 					player1.get(j).setMoving(false);
+					data = "stop@1";
+					if(ServerMain.model == 1)  Thread.sleep(sec);
 				}
 			}
 			else {
+				Direction dir = Direction.LEFT;
 				if(flag_A) {
 					for(int j = 0; j < player1.size(); j++) {
 						player1.get(j).setDir(Direction.LEFT);
+						dir = Direction.LEFT;
 					}
 				}
 				if(flag_D) {
 					for(int j = 0; j < player1.size(); j++) {
 						player1.get(j).setDir(Direction.RIGHT);
+						dir = Direction.RIGHT;
 					}
 				}
 				if(flag_W) {
 					for(int j = 0; j < player1.size(); j++) {
 						player1.get(j).setDir(Direction.UP);
+						dir = Direction.UP;
 					}
 				}
 				if(flag_S) {
 					for(int j = 0; j < player1.size(); j++) {
 						player1.get(j).setDir(Direction.DOWN);
+						dir = Direction.DOWN;
 					}
 				}
+				data = "playerchange@" + dir;
+				if(ServerMain.model == 1)  Thread.sleep(sec);
 				for(int j = 0; j < player1.size(); j++) {
 					player1.get(j).setMoving(true);
 				}

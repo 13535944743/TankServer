@@ -16,12 +16,12 @@ public class Tank {
 	private boolean havedfired = false; //记录有没有发射过子弹
 	
 	private boolean moving = false;
-	private final int speed = 1;  //6
+	private int speed = 6;  //6
 	private TankFrame tf;
 	private boolean live = true;
 	private Group group = Group.Enemy;
 	private int id = 0;//辨别客户端服务端坦克,0 为服务器端，1 为客户端
-	public int index;  //编号，确定变换方向时是哪辆坦克
+	public int index = 0;  //编号，确定变换方向时是哪辆坦克
 	public Tank(int x, int y, Direction dir,Group group, TankFrame tf) {
 		super();
 		this.setX(x);
@@ -29,10 +29,11 @@ public class Tank {
 		this.group = group;
 		this.dir = dir;
 		this.tf = tf;
+		if(ServerMain.model == 1)  this.speed = 4;
 		if(group == Group.Enemy)  moving = true;
 	}
 	
-	public void paint(Graphics g) {
+	public void paint(Graphics g) throws InterruptedException, IllegalArgumentException{
 		if(!live)  {
 			tf.enemies.remove(this);
 			tf.player1.remove(this);   //坦克死掉移除
@@ -97,6 +98,7 @@ public class Tank {
 							int index = 4;
 							while( moving == false) {
 								try {
+									if(index <= 0)  index = 1;
 									int ran = random.nextInt(index) + 1;
 									switch(saizi[ran]) {
 									case 1:{
@@ -139,7 +141,31 @@ public class Tank {
 								else if(dir == Direction.RIGHT && getX() + speed > tf.Window_Width - 40)    moving = false;
 								else if(dir == Direction.UP && getY() - speed < 30)    moving = false;
 								else if(dir == Direction.DOWN && getY() + speed > tf.Window_Height - 30)    moving = false;
-								else moving = true;
+								else
+								{
+									if(ServerMain.model == 1) {
+//										switch(dir) {
+//										case UP:
+//											tf.data = "d@1";
+//											break;
+//										case RIGHT:
+//											tf.data = "d@2";
+//											break;
+//										case DOWN:
+//											tf.data = "d@3";
+//											break;
+//										case LEFT:
+//											tf.data = "d@4";
+//											break;
+//										}
+//										try {
+//											Thread.sleep(50);
+//										} catch (InterruptedException e) {
+//											e.printStackTrace();
+//										}
+									}
+									moving = true;
+								}
 							}
 						}
 					}, 0, 1000);
@@ -177,7 +203,7 @@ public class Tank {
 		}
 		move();
 	} 
-	public void move() {
+	public void move() throws InterruptedException {
 		if(!moving) return;
 		switch(dir) {
 		case LEFT:	setX(getX() - speed);break;
@@ -188,7 +214,7 @@ public class Tank {
 		}
 		if( random.nextInt(100) > 90  && group == Group.Enemy)  this.fire();
 	}
-	public void fire() { 
+	public void fire() throws InterruptedException { 
 		if(havedfired == true)   {
 			if(bullet.isLive() == false) {
 				havedfired = false;
@@ -211,10 +237,44 @@ public class Tank {
 		}
 		if(group == Group.Player)     {
 			bullet = new Bullet(bullet_x, bullet_y, this.dir,group.Player,  this.tf);
+			int d = 0;
+			switch(this.dir) {
+			case UP:
+				d = 1;
+				break;
+			case RIGHT:
+				d = 2;
+				break;
+			case DOWN:
+				d = 3;
+				break;
+			case LEFT:
+				d = 4;
+				break;
+			}
+			tf.data = "b@" + bullet_x + "@" + bullet_y + "@" + d + "@1";    //最后的1代表player
+			if(ServerMain.model == 1)  Thread.sleep(tf.sec);
 			tf.bullets.add(bullet);  //把坦克的位置和方向传给子弹作为子弹的属性
 		}
 		else if(group == Group.Enemy)  {
 			bullet = new Bullet(bullet_x, bullet_y, this.dir,group.Enemy,  this.tf);
+			int d = 0;
+			switch(this.dir) {
+			case UP:
+				d = 1;
+				break;
+			case RIGHT:
+				d = 2;
+				break;
+			case DOWN:
+				d = 3;
+				break;
+			case LEFT:
+				d = 4;
+				break;
+			}
+			tf.data = "b@" + bullet_x + "@" + bullet_y + "@" + d + "@0";
+			if(ServerMain.model == 1)  Thread.sleep(tf.sec);
 			tf.bullets.add(bullet);
 		}
 		
@@ -418,6 +478,14 @@ public class Tank {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 	
 }

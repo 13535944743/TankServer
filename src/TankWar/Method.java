@@ -43,7 +43,7 @@ public class Method {
 		return true;
 	}
 	
-	public static boolean updatePlayer(TankFrame tf) {
+	public static boolean updatePlayer(TankFrame tf) throws InterruptedException {
 		if(ServerMain.model == 0) {
 			if( tf.player1.size() == 1)  return false;
 			tf.player1.add(new Tank(187,575,Direction.UP, Group.Player, tf));
@@ -55,9 +55,13 @@ public class Method {
 				Tank temp = new Tank(367, 575,Direction.UP, Group.Player, tf);
 				temp.setId(1);
 				tf.player2.add(temp);
+				tf.data = "q@367@575";  
+				Thread.sleep(tf.sec);
 			}
 			else if(tf.player1.size() == 0) {
 				tf.player1.add(new Tank(187,575,Direction.UP, Group.Player, tf));
+				tf.data = "p@187@575";  
+				Thread.sleep(tf.sec);
 			}
 		}
 		return true;
@@ -105,8 +109,13 @@ public class Method {
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask() {
 					public void run() {
-						if(updatePlayer(tf) == false) {
-							timer.cancel();
+						try {
+							if(updatePlayer(tf) == false) {
+								timer.cancel();
+							}
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 					}
 				}, 1000, 100);
@@ -204,8 +213,9 @@ public class Method {
 	public static void double_game() throws InterruptedException {
 		ServerMain.game_over = false;    //每次开始游戏，游戏重置为没有失败
 		tf = new TankFrame();	
+		System.out.println("TF");
 		tf.setTitle("坦克大战服务端");
-		tf.setChance(6);
+		tf.setChance(10086);
 		int i;
 		Random random = new Random();
 		
@@ -214,32 +224,37 @@ public class Method {
 		
 		tf.player1.add(new Tank(187,575,Direction.UP, Group.Player, tf));
 		tf.data = "p@187@575";  
-		Thread.sleep(50);
+		if(ServerMain.model == 1)  Thread.sleep(tf.sec);
 		Tank temp = new Tank(367,575,Direction.UP, Group.Player, tf);
 		temp.setId(1);
 		tf.player2.add(temp);
 		tf.data = "q@367@575";  
-		Thread.sleep(50);
-		tf.enemies.add(new Tank(95, 31,Direction.UP,Group.Enemy, tf));
-		tf.data = "e@95@31";
-		Thread.sleep(50);
-		for(i = 1; i < 5; i++) {
-			tf.enemies.add(new Tank(185 + 90 * i, 31,Direction.UP,Group.Enemy, tf));//敌方坦克初始位置设置为顶行，方向向上，遇到障碍，随机四个方向
+		if(ServerMain.model == 1)  Thread.sleep(tf.sec);
+		Tank ene;
+		ene = new Tank(95, 31,Direction.UP,Group.Enemy, tf);
+		ene.setIndex(tf.EnemyId++);
+		tf.enemies.add(ene);
+		tf.data = "e@95@31@" + + (tf.EnemyId - 1);
+		if(ServerMain.model == 1)  Thread.sleep(tf.sec);
+		for(i = 1; i < 3; i++) {
+			ene = new Tank(185 + 90 * i, 31,Direction.UP,Group.Enemy, tf);//敌方坦克初始位置设置为顶行，方向向上，遇到障碍，随机四个方向
+			ene.setIndex(tf.EnemyId++);
+			tf.enemies.add(ene);
 			switch(i) {
 			case 1:
-				tf.data = "e@275@31";
+				tf.data = "e@275@31@" + (tf.EnemyId - 1);
 				break;
 			case 2:
-				tf.data = "e@365@31";
+				tf.data = "e@365@31@" + (tf.EnemyId - 1);
 				break;
-			case 3:
-				tf.data = "e@455@31";
-				break;
-			case 4:
-				tf.data = "e@545@31";
-				break;
+//			case 3:
+//				tf.data = "e@455@31@" + (tf.EnemyId - 1);
+//				break;
+//			case 4:
+//				tf.data = "e@545@31@ + (tf.EnemyId - 1)";
+//				break;
 			}
-			Thread.sleep(50);
+			if(ServerMain.model == 1)  Thread.sleep(tf.sec);
 		}
 		
 		while(true) {
@@ -259,8 +274,13 @@ public class Method {
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask() {
 					public void run() {
-						if(updatePlayer(tf) == false) {
-							timer.cancel();
+						try {
+							if(updatePlayer(tf) == false) {
+								timer.cancel();
+							}
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 					}
 				}, 1000, 100);
@@ -269,8 +289,13 @@ public class Method {
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask() {
 					public void run() {
-						if(updatePlayer(tf) == false) {
-							timer.cancel();
+						try {
+							if(updatePlayer(tf) == false) {
+								timer.cancel();
+							}
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 					}
 				}, 1000, 100);
@@ -388,8 +413,5 @@ public class Method {
 			
 			tf.repaint();
 		}
-	}
-	public void writeToOutputLine() {
-		
 	}
 }
