@@ -41,6 +41,8 @@ class TankFrame extends Frame{
 	String data = "";
 	public static int sec = 50;
 	public static int EnemyId = 1;
+	public static boolean pressed = false;
+	public static boolean pressed_fire = false;
 	
 	public TankFrame() {
 		setSize(Window_Width,Window_Height);
@@ -180,6 +182,7 @@ class TankFrame extends Frame{
 					player1.get(j).setMoving(false);
 					data = "stop@1";
 					if(ServerMain.model == 1)  Thread.sleep(sec);
+					pressed = false;
 				}
 			}
 			else {
@@ -208,11 +211,15 @@ class TankFrame extends Frame{
 						dir = Direction.DOWN;
 					}
 				}
-				data = "playerchange@" + dir;
-				if(ServerMain.model == 1)  Thread.sleep(sec);
+				if(!pressed) {
+					data = "playerchange@" + dir;
+					System.out.println(data);
+					if(ServerMain.model == 1)  Thread.sleep(sec);
+				}
 				for(int j = 0; j < player1.size(); j++) {
 					player1.get(j).setMoving(true);
 				}
+				pressed = true;
 			}
 		}
 	}
