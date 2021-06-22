@@ -95,48 +95,69 @@ public class Tank {
 					timer.schedule(new TimerTask() {
 						public void run() {
 							int[] saizi = {0, 1, 2, 3, 4};         //实现每个方向只会随机出一次
-							int index = 4;
+							int index_sizi = 4;
 							while( moving == false) {
 								try {
-									if(index <= 0)  index = 1;
-									int ran = random.nextInt(index) + 1;
-									switch(saizi[ran]) {
+									int ran = random.nextInt(4) + 1;
+									switch(ran) {
 									case 1:{
 										dir = Direction.LEFT;
-										int temp = saizi[index];
-										saizi[index] = saizi[1];
-										saizi[1] = temp;
 									}
 									break;
 									case 2:{
 										dir = Direction.RIGHT;
-										int temp = saizi[index];
-										saizi[index] = saizi[2];
-										saizi[1] = temp;
 									}
 									break;
 									case 3:{
 										dir = Direction.UP;
-										int temp = saizi[index];
-										saizi[index] = saizi[3];
-										saizi[1] = temp;
 									}
 									break;
 									case 4:{
 										dir = Direction.DOWN;
-										int temp = saizi[index];
-										saizi[index] = saizi[4];
-										saizi[1] = temp;
 									}
 									break;
 									default:
 									break;
 									}
+//									if(index_sizi <= 0)  index_sizi = 1;
+//									int ran = random.nextInt(index_sizi) + 1;
+//									switch(saizi[ran]) {
+//									case 1:{
+//										dir = Direction.LEFT;
+//										int temp = saizi[index_sizi];
+//										saizi[index_sizi] = saizi[1];
+//										saizi[1] = temp;
+//									}
+//									break;
+//									case 2:{
+//										dir = Direction.RIGHT;
+//										int temp = saizi[index_sizi];
+//										saizi[index_sizi] = saizi[2];
+//										saizi[1] = temp;
+//									}
+//									break;
+//									case 3:{
+//										dir = Direction.UP;
+//										int temp = saizi[index_sizi];
+//										saizi[index_sizi] = saizi[3];
+//										saizi[1] = temp;
+//									}
+//									break;
+//									case 4:{
+//										dir = Direction.DOWN;
+//										int temp = saizi[index_sizi];
+//										saizi[index_sizi] = saizi[4];
+//										saizi[1] = temp;
+//									}
+//									break;
+//									default:
+//									break;
+//									}
 								} catch(ArrayIndexOutOfBoundsException e) {
 									System.out.println(e);
 								}
 								
-								index--;
+								index_sizi--;
 								if(dir == Direction.LEFT && getX() - speed < 5)    moving = false;//再继续向左走会超出窗口
 								else if(dir == Direction.RIGHT && getX() + speed > tf.Window_Width - 40)    moving = false;
 								else if(dir == Direction.UP && getY() - speed < 30)    moving = false;
@@ -144,25 +165,26 @@ public class Tank {
 								else
 								{
 									if(ServerMain.model == 1) {
-//										switch(dir) {
-//										case UP:
-//											tf.data = "d@1";
-//											break;
-//										case RIGHT:
-//											tf.data = "d@2";
-//											break;
-//										case DOWN:
-//											tf.data = "d@3";
-//											break;
-//										case LEFT:
-//											tf.data = "d@4";
-//											break;
-//										}
-//										try {
-//											Thread.sleep(50);
-//										} catch (InterruptedException e) {
-//											e.printStackTrace();
-//										}
+										switch(dir) {
+										case UP:
+											tf.data = "d@" + x + "@" + y + "@1@" + index;    //把x和y坐标重新发送过去
+											break;
+										case RIGHT:
+											tf.data = "d@" + x + "@" + y + "@2@" + index;
+											break;
+										case DOWN:
+											tf.data = "d@" + x + "@" + y + "@3@" + index;
+											break;
+										case LEFT:
+											tf.data = "d@" + x + "@" + y + "@4@" + index;
+											break;
+										}
+//										System.out.println(tf.data);
+										try {
+											Thread.sleep(tf.sec);
+										} catch (InterruptedException e) {
+											e.printStackTrace();
+										}
 									}
 									moving = true;
 								}
@@ -273,7 +295,7 @@ public class Tank {
 				d = 4;
 				break;
 			}
-			tf.data = "b@" + bullet_x + "@" + bullet_y + "@" + d + "@0";
+			tf.data = "b@" + bullet_x + "@" + bullet_y + "@" + d + "@0@" + tf.chance + "@" + tf.step_to_win;
 			if(ServerMain.model == 1)  Thread.sleep(tf.sec);
 			tf.bullets.add(bullet);
 		}

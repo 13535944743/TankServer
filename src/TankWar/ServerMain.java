@@ -7,12 +7,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ServerMain {
 	public static StartFrame f1 = new StartFrame("坦克大战服务端");
 	public static Server server;
 	public static int model = 0; //0表示单人模式,1表示双人模式
-	public static boolean game_over = false;
 	public static void main(String[] args) throws InterruptedException, IOException{
 		
 		HelpFrame f2 = new HelpFrame("游戏帮助");
@@ -27,6 +27,13 @@ public class ServerMain {
 			}
 			else if(StartFrame.flag == 2) {
 				model = 1;
+				server = null;
+				Object[] options = {"确定","取消等待"};
+				int option = JOptionPane.showOptionDialog(null, "等待连接中", null, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+				if(option == 1) {
+					StartFrame.flag = 0;
+					continue;
+				}
 				server = new Server(f1);
 				StartFrame.flag = 0;
 			}
@@ -48,27 +55,6 @@ public class ServerMain {
 			}
 			
 		}
-//		JFrame f1 = new JFrame("坦克大战");
-//		JFrame f2 = new JFrame("游戏帮助");
-//		Start.start(f1);
-//		while(true) {
-//			Thread.sleep(50);
-//			if(Start.flag == 1) { 
-//				f1.setVisible(false);
-//				single_game(f1);
-//				Start.flag = 0;
-//			 } 
-//			else if(Start.flag == 3) {
-//				f1.setVisible(false);
-//				Start.flag = 0;
-//				Start.help(f1, f2);
-//			}
-//			else if(Start.flag == 4) {
-//				System.out.println("退出游戏");
-//				Start.flag = 0;
-//				System.exit(0);
-//			}
-//		}
 		
 	}
 	

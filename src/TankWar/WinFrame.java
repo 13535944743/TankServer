@@ -36,7 +36,7 @@ public class WinFrame extends JFrame{
 		b1.setBackground(Color.WHITE);
 		b1.setForeground(Color.BLACK);
 		b1.setSize(100, 50);
-		b1.setLocation(350, 450);
+		b1.setLocation(200, 450);
 		b1.addMouseListener(new MouseAdapter() {//鼠标监听事件
 			public void mouseReleased(MouseEvent event) {
 				if(event.getButton() == MouseEvent.BUTTON1) {  
@@ -50,13 +50,11 @@ public class WinFrame extends JFrame{
 				}
 			}
 			public void mouseEntered(MouseEvent event) {
-				System.out.println("enter");
 				b1.setBackground(Color.BLACK);
 				b1.setForeground(Color.WHITE);
 				
 			}
 			public void mouseExited(MouseEvent event) {
-				System.out.println("exited");
 				b1.setBackground(Color.WHITE);
 				b1.setForeground(Color.BLACK);
 			}
@@ -90,41 +88,45 @@ public class WinFrame extends JFrame{
 				b2.setForeground(Color.BLACK);
 			}
 		});
-		JButton b3 = new JButton("再玩一次");
-		b3.setFont( new Font("雅黑", Font.BOLD, 16));
-		b3.setBackground(Color.WHITE);
-		b3.setForeground(Color.BLACK);
-		b3.setSize(100, 50);
-		b3.setLocation(200, 450);
-		b3.addMouseListener(new MouseAdapter() {//鼠标监听事件
-			public void mouseReleased(MouseEvent event) {
-				if(event.getButton() == MouseEvent.BUTTON1) {  
-						try {
-							dispose();
-							StartFrame.flag = 1;
-							System.out.println("1");
-						}
-						catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-			public void mouseEntered(MouseEvent event) {
-				System.out.println("enter");
-				b3.setBackground(Color.BLACK);
-				b3.setForeground(Color.WHITE);
-			}
-			public void mouseExited(MouseEvent event) {
-				System.out.println("exited");
-				b3.setBackground(Color.WHITE);
-				b3.setForeground(Color.BLACK);
-			}
-		});
+		if(ServerMain.model == 1) {
+			
+		}
+//		JButton b3 = new JButton("再玩一次");
+//		b3.setFont( new Font("雅黑", Font.BOLD, 16));
+//		b3.setBackground(Color.WHITE);
+//		b3.setForeground(Color.BLACK);
+//		b3.setSize(100, 50);
+//		b3.setLocation(200, 450);
+//		b3.addMouseListener(new MouseAdapter() {//鼠标监听事件
+//			public void mouseReleased(MouseEvent event) {
+//				if(event.getButton() == MouseEvent.BUTTON1) {  
+//						try {
+//							dispose();
+//							StartFrame.flag = 1;
+//							System.out.println("1");
+//						}
+//						catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//			public void mouseEntered(MouseEvent event) {
+//				System.out.println("enter");
+//				b3.setBackground(Color.BLACK);
+//				b3.setForeground(Color.WHITE);
+//			}
+//			public void mouseExited(MouseEvent event) {
+//				System.out.println("exited");
+//				b3.setBackground(Color.WHITE);
+//				b3.setForeground(Color.BLACK);
+//			}
+//		});
 		
 		root.add(b1);
 		root.add(b2);
-		root.add(b3);
+//		root.add(b3);
 		setSize(800,600);
+		setLocation(550, 200);
 		setVisible(true);
 	}
 	private class BgPanel extends JPanel {

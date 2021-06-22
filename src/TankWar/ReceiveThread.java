@@ -11,7 +11,6 @@ public class ReceiveThread extends Thread{
 		try {
 			receiveMessage();
 		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -19,7 +18,12 @@ public class ReceiveThread extends Thread{
 		String readline;
 		while(true) {
 			readline = Server.in.readLine();
+			if(readline.equals("finish")) {
+				
+				break;
+			}
 			String[] buff = readline.split("@");
+//			System.out.println(readline);
 			if(buff[0].equals("b")) {
 				Direction direction = Direction.UP;
 				Group group = Group.Player;
@@ -31,7 +35,7 @@ public class ReceiveThread extends Thread{
 					direction = Direction.UP;
 					break;
 				case 2:
-					direction = Direction.LEFT;
+					direction = Direction.RIGHT;
 					break;
 				case 3:
 					direction = Direction.DOWN;
@@ -48,8 +52,12 @@ public class ReceiveThread extends Thread{
 				}
 			}
 			if(buff[0].equals("playerchange")) {
+				int x = Integer.parseInt(buff[1]);
+				int y = Integer.parseInt(buff[2]);
 				for(int j = 0; j < tf.player2.size(); j++) {
-					Direction dir = Direction.valueOf(buff[1]);
+					Direction dir = Direction.valueOf(buff[3]);
+					tf.player2.get(j).setX(x);
+					tf.player2.get(j).setY(y);
 					tf.player2.get(j).setDir(dir);
 					tf.player2.get(j).setMoving(true);
 				}

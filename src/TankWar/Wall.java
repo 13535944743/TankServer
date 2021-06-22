@@ -62,6 +62,8 @@ public class Wall {
 		
 	}
 	public static void buildwall(TankFrame tf) {
+		if(ServerMain.model == 1) 
+		{
 		//╣зр╩ап
 		for(int i = 0; i < 2; i++)
 			tf.walls.add(new Wall(50 , 75 + i * 45, tf));
@@ -85,7 +87,6 @@ public class Wall {
 		for(int i = 0; i < 2; i++)
 			tf.walls.add(new Wall(230 , 530 + i * 45, tf));
 		
-		tf.walls.add(new Wall(275 , 121, tf));
 		tf.walls.add(new Wall(275 , 440, tf));
 		tf.walls.add(new Wall(275 , 530, tf));
 		
@@ -113,5 +114,57 @@ public class Wall {
 			tf.walls.add(new Wall(500 , 305 + 45 * i, tf));
 		for(int i = 0; i < 2; i++)
 			tf.walls.add(new Wall(500 , 530 + 45 * i, tf));
+		}
+		else {
+			int i;
+			for(i = 0; i <= 2; i++)
+			{
+				tf.walls.add(new Wall(140 , 121 + 45 * i, tf));
+			}
+			for(i = 1; i <= 2; i++)
+			{
+				tf.walls.add(new Wall(140 - 45 * i, 211, tf));
+			}
+			for(i = 0; i <= 4; i++)
+			{
+				tf.walls.add(new Wall(320 , 31 + 45 * i, tf));
+			}
+			for(i = 0; i <= 4; i++)
+			{
+				tf.walls.add(new Wall(320 + 45 * i, 211, tf));
+			}
+//			for(i = 1; i <= 11; i++)
+//			{
+//				if(i >= 5 && i <= 7) continue;
+//				tf.walls.add(new Wall(45 * i, 310, tf));
+//			}
+			
+			for(i = 1; i <= 11; i++)
+			{
+				if(i >= 4 && i <= 9) 
+				{
+					continue;
+				}
+				tf.walls.add(new Wall(45 * i, 410, tf));
+			}
+			for(i = 1; i <= 4; i++)
+			{
+				if(i == 1 || i == 2) continue;
+				tf.walls.add(new Wall(135, 410 + 45 * i, tf));
+			}
+			for(i = 1; i <= 4; i++)
+			{
+				if(i == 1 || i == 2) continue;
+				tf.walls.add(new Wall(450, 410 + 45 * i, tf));
+			}
+			
+			for(i = 0; i < 2; i++)
+				tf.walls.add(new Wall(230 , 530 + i * 45, tf));
+
+			tf.walls.add(new Wall(275 , 530, tf));
+			for(i = 0; i < 2; i++)
+				tf.walls.add(new Wall(320 , 530 + 45 * i, tf));
+			
+		}
 	}
 }

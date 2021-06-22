@@ -42,15 +42,15 @@ public class Bullet {
 	}
 	public void collide(Tank tank, Group group) {
 		if(group == this.group)  {
-			if(this == tank.getBullet())  return;
-			else {
-				Rectangle bullet_rec = new Rectangle(this.x, this.y, this.width, this.height);
-				Rectangle tank_rec = new Rectangle(tank.getX(), tank.getY(), tank.getWidth(), tank.getHeight());
-				if( bullet_rec.intersects(tank_rec) )  {  //使用intersects方法实现进行碰撞测试
-					this.die();
-				}//敌方子弹和非发射子弹的坦克相撞，子弹消失，坦克无变化
-				return;
-			}
+			return;
+//			else {
+//				Rectangle bullet_rec = new Rectangle(this.x, this.y, this.width, this.height);
+//				Rectangle tank_rec = new Rectangle(tank.getX(), tank.getY(), tank.getWidth(), tank.getHeight());
+//				if( bullet_rec.intersects(tank_rec) )  {  //使用intersects方法实现进行碰撞测试
+//					this.die();
+//				}//敌方子弹和非发射子弹的坦克相撞，子弹消失，坦克无变化
+//				return;
+//			}
 		}
 		Rectangle bullet_rec = new Rectangle(this.x, this.y, this.width, this.height);
 		Rectangle tank_rec = new Rectangle(tank.getX(), tank.getY(), tank.getWidth(), tank.getHeight());

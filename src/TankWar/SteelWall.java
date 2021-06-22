@@ -55,6 +55,8 @@ public class SteelWall {
 		}
 	}
 	public static void buildSteelWall(TankFrame tf) {
+		if(ServerMain.model == 1)
+		{
 		for(int i = 0; i < 1; i++)
 			tf.steelwalls.add(new SteelWall(5, 395 + 45 * i, tf));
 		
@@ -80,8 +82,28 @@ public class SteelWall {
 		tf.steelwalls.add(new SteelWall(455 , 440, tf));
 		
 		tf.steelwalls.add(new SteelWall(545 , 211, tf));
-		
+//		
 			for(int j = 0; j < 13; j++)
 				tf.steelwalls.add(new SteelWall(590, 31 + j * 45, tf));
+		}
+		else {
+			for(int i = 0; i < 2; i++)
+				tf.steelwalls.add(new SteelWall(140 , 31 + i * 45, tf));
+			tf.steelwalls.add(new SteelWall(320 , 31, tf));
+			for(int i = 5; i <= 7; i++)
+			{
+				tf.steelwalls.add(new SteelWall(45 * i , 310, tf));
+			}
+			for(int i = 1; i <= 2; i++) 
+			{
+				tf.steelwalls.add(new SteelWall(135 , 410 + 45 * i, tf));
+			}
+			for(int i = 1; i <= 2; i++) 
+			{
+				tf.steelwalls.add(new SteelWall(450 , 410 + 45 * i, tf));
+			}
+			for(int j = 0; j < 13; j++)
+				tf.steelwalls.add(new SteelWall(590, 31 + j * 45, tf));
+		}
 	}
 }

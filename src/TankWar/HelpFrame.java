@@ -34,72 +34,68 @@ public class HelpFrame extends JFrame{
 		});
 		setLayout(null);
 		setResizable(false);
+		JLabel b0 = new JLabel("Tips:双人模式,共享生命,注意配合", JLabel.CENTER);
+		b0.setFont( new Font("雅黑", Font.BOLD, 16));
+		b0.setForeground(Color.RED);
+		
+		b0.setBackground(Color.WHITE);
+		b0.setSize(300, 50);
+		b0.setLocation(400, 100);
 		JLabel b1 = new JLabel("W：上", JLabel.CENTER);
 		b1.setFont( new Font("雅黑", Font.BOLD, 16));
 		b1.setBorder(BorderFactory.createLineBorder(Color.BLACK));   //添加边框
-		b1.setOpaque(true);            //设置为不透明
 		b1.setBackground(Color.WHITE);
 		b1.setSize(100, 50);
-		b1.setLocation(500, 100);
+		b1.setLocation(500, 170);
 		JLabel b2 = new JLabel("A：左",JLabel.CENTER);
 		b2.setFont( new Font("雅黑", Font.BOLD, 16));
 		b2.setBorder(BorderFactory.createLineBorder(Color.BLACK));   //添加边框
-		b2.setOpaque(true); 
+		b2.setBackground(Color.WHITE);
 		b2.setSize(100, 50);
-		b2.setLocation(500, 170);
+		b2.setLocation(500, 240);
 		JLabel b3 = new JLabel("S：下", JLabel.CENTER);
 		b3.setFont( new Font("雅黑", Font.BOLD, 16));
 		b3.setBorder(BorderFactory.createLineBorder(Color.BLACK));   //添加边框
-		b3.setOpaque(true); 
 		b3.setBackground(Color.WHITE);
 		b3.setSize(100, 50);
-		b3.setLocation(500, 240);
+		b3.setLocation(500, 310);
 		JLabel b4 = new JLabel("D：右", JLabel.CENTER);
 		b4.setFont( new Font("雅黑", Font.BOLD, 16));
 		b4.setBorder(BorderFactory.createLineBorder(Color.BLACK));   //添加边框
-		b4.setOpaque(true); 
 		b4.setBackground(Color.WHITE);
 		b4.setSize(100, 50);
-		b4.setLocation(500, 310);
+		b4.setLocation(500, 380);
 		JLabel b5 = new JLabel("J：开炮", JLabel.CENTER);
 		b5.setFont( new Font("雅黑", Font.BOLD, 16));
 		b5.setBorder(BorderFactory.createLineBorder(Color.BLACK));   //添加边框
-		b5.setOpaque(true); 
+//		b5.setOpaque(true); 
 		b5.setBackground(Color.WHITE);
 		b5.setSize(100, 50);
-		b5.setLocation(500, 380);
+		b5.setLocation(500, 450);
 		JButton b6 = new JButton("返回");
 		b6.setFont( new Font("雅黑", Font.BOLD, 16));
 		Color c = new Color(94, 108, 46);
 		b6.setBackground(c);
 		b6.setForeground(Color.WHITE);
 		b6.setSize(100, 50);
-		b6.setLocation(650, 380);
+		b6.setLocation(650, 450);
 		b6.addMouseListener(new MouseAdapter() {//鼠标监听事件
 			public void mouseReleased(MouseEvent event) {
 				if(event.getButton() == MouseEvent.BUTTON1) {  
-						try {
-							flag = 1;
-							//boolean x = f1.getGraphics().drawImage(ResourceMgr.tankwar, 170 , 30, 300, 145, null);
-							System.out.println("返回");							
-						}
-						catch (Exception e) {
-						e.printStackTrace();
-					}
+						flag = 1;		
 				}
 			}
 			public void mouseEntered(MouseEvent event) {
-				System.out.println("enter");
 				b6.setBackground(Color.WHITE);
 				b6.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent event) {
-				System.out.println("exited");
 				b6.setBackground(c);
 				b6.setForeground(Color.WHITE);
 			}
 		});
 		
+		root.add(b0);
 		root.add(b1);
 		root.add(b2);
 		root.add(b3);
@@ -107,6 +103,7 @@ public class HelpFrame extends JFrame{
 		root.add(b5);
 		root.add(b6);
 		setSize(800,600);
+		setLocation(550, 200);
 		setVisible(true);
 	}
 	private class BgPanel extends JPanel {
