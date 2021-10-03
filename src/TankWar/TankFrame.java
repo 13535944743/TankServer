@@ -35,7 +35,7 @@ class TankFrame extends Frame{
 	Home home = new Home(277, 575,true, this);
 	Blast blast = new Blast(100, 100, this);
 	int chance = 3;
-	int step_to_win = 5;
+	int step_to_win = 3;
 	public final int Window_Width = 800, Window_Height = 625;
 	int flag = 0; 
 	String data = "";   //要传的数据
@@ -49,7 +49,7 @@ class TankFrame extends Frame{
 		setResizable(false);
 //		setTitle("坦克大战");
 		if(ServerMain.model == 1) {
-			step_to_win = 5;
+			step_to_win = 3;
 		}
 		setBackground(Color.BLACK);
 		setLayout(null);
